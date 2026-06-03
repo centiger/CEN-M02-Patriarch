@@ -1,4 +1,2 @@
-CEN Patriarch Matrix - Abraham Hub Integrated v2
-- Fixed hub data JS loading
-- Abraham hub content integrated
-- PNG map replacement structure
+patriarch-hub-revive-20260603-v3
+허브 연결 캐시 차단 및 5개 허브 표준 데이터 복구

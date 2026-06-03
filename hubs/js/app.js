@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);
 function qs(){return new URLSearchParams(location.search)}
 function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 async function init(){
-  const res=await fetch('./data/hubs.json?v=abraham-standard-1'); DATA=await res.json();
+  const res=await fetch('./data/hubs.json?v=patriarch-hub-revive-20260603-v3', {cache:'no-store'}); DATA=await res.json();
   const slug=qs().get('hub')||DATA.defaultHub||'abraham'; render(slug);
 }
 function find(slug){return DATA.hubs.find(h=>h.slug===slug||h.id===slug)||DATA.hubs[0]}
@@ -27,10 +27,10 @@ function render(slug){
   if(n){btn.style.display='block';btn.textContent=`다음: ${n.title} →`;btn.onclick=()=>go(n.slug||n.id)}
   else if(h.nextUrl){btn.style.display='block';btn.textContent=(h.nextLabel||'다음 시대로 이동')+' →';btn.onclick=()=>{location.href=h.nextUrl}}
   else{btn.style.display='none'}
-  history.replaceState(null,'',`?hub=${h.slug||h.id}`);
+  history.replaceState(null,'',`?hub=${h.slug||h.id}&v=patriarch-hub-revive-20260603-v3`);
 }
 function renderPending(h){
-  $('title').textContent=`${h.icon||''} ${h.title}`;$('subtitle').textContent=h.subtitle||'제작 예정';$('verse').textContent='이 허브는 다음 단계에서 제작할 예정입니다.';$('map').src=h.map||'assets/maps/abraham-hub-map.png';$('caption').textContent='족장시대 허브 구조에 맞춰 PNG 교체형 지도 영역을 유지합니다.';$('events').innerHTML='<div class="item"><b>제작 예정</b>내용 추가 예정입니다.</div>';$('meanings').innerHTML='<li>내용 추가 예정</li>';$('connections').innerHTML='<span class="chip">준비중</span>';$('references').innerHTML='<span class="chip">준비중</span>';$('message').textContent='다음 제작 단계에서 완성합니다.';$('nextBtn').style.display='none';history.replaceState(null,'',`?hub=${h.slug||h.id}`);
+  $('title').textContent=`${h.icon||''} ${h.title}`;$('subtitle').textContent=h.subtitle||'제작 예정';$('verse').textContent='이 허브는 다음 단계에서 제작할 예정입니다.';$('map').src=h.map||'assets/maps/abraham-hub-map.png';$('caption').textContent='족장시대 허브 구조에 맞춰 PNG 교체형 지도 영역을 유지합니다.';$('events').innerHTML='<div class="item"><b>제작 예정</b>내용 추가 예정입니다.</div>';$('meanings').innerHTML='<li>내용 추가 예정</li>';$('connections').innerHTML='<span class="chip">준비중</span>';$('references').innerHTML='<span class="chip">준비중</span>';$('message').textContent='다음 제작 단계에서 완성합니다.';$('nextBtn').style.display='none';history.replaceState(null,'',`?hub=${h.slug||h.id}&v=patriarch-hub-revive-20260603-v3`);
 }
 function go(slug){render(slug);window.scrollTo({top:0,behavior:'smooth'})}
 function openList(){

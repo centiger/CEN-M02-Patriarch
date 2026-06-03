@@ -1,8 +1,8 @@
-const CACHE_NAME = 'patriarch-matrix-abraham-integrated-v2-splitfooter-fix2';
+const CACHE_NAME = 'patriarch-hub-revive-20260603-v3';
 const ASSETS_TO_CACHE = [
-  './', './index.html', './style.css', './manifest.json', './manifest.webmanifest',
+  './style.css', './manifest.json', './manifest.webmanifest',
   './assets/patriarch-bg.png', './assets/patriarch-main.png', './assets/patriarch-matrix-bg.png',
-  './hubs/index.html', './hubs/data/hubs.json', './hubs/js/app.js', './hubs/assets/maps/abraham-hub-map.png'
+  './assets/patriarch-footer.png', './assets/patriarch-fixed-footer.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -10,19 +10,19 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(caches.keys().then((names) => Promise.all(names.map((name) => name !== CACHE_NAME && caches.delete(name)))).then(() => self.clients.claim()));
+  event.waitUntil(
+    caches.keys()
+      .then((names) => Promise.all(names.map((name) => name !== CACHE_NAME && caches.delete(name))))
+      .then(() => self.clients.claim())
+  );
 });
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
-  const networkFirst = /\/hubs\/(index\.html|js\/app\.js|data\/hubs\.json)$/.test(url.pathname) || url.pathname.endsWith('/index.html');
-  if (networkFirst) {
-    event.respondWith(fetch(event.request).then((response) => {
-      const clone = response.clone();
-      caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-      return response;
-    }).catch(() => caches.match(event.request)));
+  const noStore = url.pathname.endsWith('/index.html') || url.pathname.endsWith('/hubs/') || url.pathname.includes('/hubs/index.html') || url.pathname.includes('/hubs/js/app.js') || url.pathname.includes('/hubs/data/hubs.json');
+  if (noStore) {
+    event.respondWith(fetch(event.request, {cache:'no-store'}).catch(() => caches.match(event.request)));
     return;
   }
   event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
