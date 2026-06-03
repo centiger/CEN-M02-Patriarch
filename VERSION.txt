@@ -1,0 +1,4 @@
+CEN Patriarch Matrix - Abraham Hub Integrated v2
+- Fixed hub data JS loading
+- Abraham hub content integrated
+- PNG map replacement structure
