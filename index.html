@@ -18,6 +18,7 @@ body{display:flex;justify-content:center}
 .hot.debug{background:rgba(247,216,137,.18);outline:1px solid rgba(247,216,137,.65)}
 
 /* 사건 전체 클릭 영역 */
+.e1,.e2,.e3,.e4,.e5{pointer-events:none}
 .e1{left:0.5%;top:8.5%;width:43.5%;height:15.5%}
 .e2{left:0.5%;top:25.0%;width:43.5%;height:15.0%}
 .e3{left:0.5%;top:41.1%;width:43.5%;height:15.0%}
@@ -25,27 +26,27 @@ body{display:flex;justify-content:center}
 .e5{left:0.5%;top:73.1%;width:43.5%;height:13.4%}
 
 /* 우측 허브 버튼 영역: 실제 아이콘/버튼 중심에 맞춤 */
-.b1a{left:47.2%;top:20.35%;width:15.8%;height:2.95%}
-.b1b{left:64.0%;top:20.35%;width:15.8%;height:2.95%}
-.b1c{left:80.8%;top:20.35%;width:17.2%;height:2.95%}
+/* 우측 실제 버튼 직접 클릭 영역: 보이는 버튼 위치에 재정렬 */
+.b1a,.b1b,.b1c,.b2a,.b2b,.b2c,.b3a,.b3b,.b3c,.b4a,.b4b,.b4c,.b5a,.b5b,.b5c{z-index:40}
+.b1a{left:44.2%;top:22.35%;width:17.1%;height:4.30%}
+.b1b{left:62.1%;top:22.35%;width:17.1%;height:4.30%}
+.b1c{left:79.9%;top:22.35%;width:16.8%;height:4.30%}
 
-.b2a{left:47.2%;top:36.48%;width:15.8%;height:2.95%}
-.b2b{left:64.0%;top:36.48%;width:15.8%;height:2.95%}
-.b2c{left:80.8%;top:36.48%;width:17.2%;height:2.95%}
+.b2a{left:44.2%;top:41.25%;width:17.1%;height:4.30%}
+.b2b{left:62.1%;top:41.25%;width:17.1%;height:4.30%}
+.b2c{left:79.9%;top:41.25%;width:16.8%;height:4.30%}
 
-.b3a{left:47.2%;top:52.70%;width:15.8%;height:2.95%}
-.b3b{left:64.0%;top:52.70%;width:15.8%;height:2.95%}
-.b3c{left:80.8%;top:52.70%;width:17.2%;height:2.95%}
+.b3a{left:44.2%;top:58.90%;width:17.1%;height:4.30%}
+.b3b{left:62.1%;top:58.90%;width:17.1%;height:4.30%}
+.b3c{left:79.9%;top:58.90%;width:16.8%;height:4.30%}
 
-/* 요셉: 기존보다 위쪽/왼쪽으로 당겨 실제 버튼 위에 맞춤 */
-.b4a{left:47.2%;top:67.25%;width:15.8%;height:3.6%}
-.b4b{left:64.0%;top:67.25%;width:15.8%;height:3.6%}
-.b4c{left:80.8%;top:67.25%;width:17.2%;height:3.6%}
+.b4a{left:44.2%;top:76.00%;width:17.1%;height:4.30%}
+.b4b{left:62.1%;top:76.00%;width:17.1%;height:4.30%}
+.b4c{left:79.9%;top:76.00%;width:16.8%;height:4.30%}
 
-/* 애굽정착: 기존보다 위쪽으로 당겨 실제 버튼 위에 맞춤 */
-.b5a{left:47.2%;top:82.75%;width:15.8%;height:3.7%}
-.b5b{left:64.0%;top:82.75%;width:15.8%;height:3.7%}
-.b5c{left:80.8%;top:82.75%;width:17.2%;height:3.7%}
+.b5a{left:44.2%;top:93.90%;width:17.1%;height:4.30%}
+.b5b{left:62.1%;top:93.90%;width:17.1%;height:4.30%}
+.b5c{left:79.9%;top:93.90%;width:16.8%;height:4.30%}
 
 /* 하단 메뉴 */
 .nhome{left:2.0%;top:92.95%;width:15.5%;height:5.7%}
@@ -170,14 +171,13 @@ hub:{title:'족장시대 허브 탐험',meta:'5개 허브',body:'아브라함, �
 exodus:{title:'다음 시대',meta:'출애굽·광야 Matrix',body:'애굽 정착은 출애굽 시대를 준비합니다.',chips:['모세','출애굽','광야']}
 };
 const sheet=document.getElementById('sheet'),backdrop=document.getElementById('backdrop'),title=document.getElementById('sheetTitle'),meta=document.getElementById('sheetMeta'),body=document.getElementById('sheetBody'),chips=document.getElementById('chips'),toast=document.getElementById('toast');
-const CEN_HUB_VERSION='patriarch-hub-revive-20260603-v3';
-function goHub(id){location.href='./hubs/index.html?hub='+encodeURIComponent(id)+'&v='+CEN_HUB_VERSION}
+function goHub(id){location.href='./hubs/index.html?hub='+encodeURIComponent(id)+'&v=20260603-buttonfix'}
 function openSheet(key){const d=DATA[key]||DATA.abraham;title.textContent=d.title;meta.textContent=d.meta;body.textContent=d.body;chips.innerHTML=d.chips.map(c=>`<span class="chip">${c}</span>`).join('');sheet.classList.add('show');backdrop.classList.add('show')}
 function closeSheet(){sheet.classList.remove('show');backdrop.classList.remove('show')}
 document.getElementById('close').onclick=closeSheet;backdrop.onclick=closeSheet;
 function showToast(t){toast.textContent=t;toast.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.classList.remove('show'),1200)}
 if(new URLSearchParams(location.search).get('debug')==='1'){document.querySelectorAll('.hot').forEach(el=>el.classList.add('debug'))}
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=patriarch-hub-revive-20260603-v3').catch(()=>{}))}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=20260603-buttonfix').catch(()=>{}))}
 </script>
 </div>
 
@@ -185,7 +185,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.se
   <img src="assets/patriarch-footer.png" alt="족장시대 핵심 흐름 및 하단 메뉴">
   <button class="footer-hot fh-home" onclick="location.href='../index.html'" aria-label="홈으로">홈으로</button>
   <button class="footer-hot fh-all" onclick="location.href='../CEN-Matrix/'" aria-label="전체 시대 Matrix">전체 시대 Matrix</button>
-  <button class="footer-hot fh-hub" onclick="location.href='hubs/index.html?hub=abraham&amp;v=patriarch-hub-revive-20260603-v3'" aria-label="허브 탐험">허브 탐험</button>
+  <button class="footer-hot fh-hub" onclick="location.href='hubs/index.html?hub=abraham&v=20260603-buttonfix'" aria-label="허브 탐험">허브 탐험</button>
   <button class="footer-hot fh-prev" onclick="location.href='../CEN-Creation-Matrix/'" aria-label="이전 창조시대 Matrix">이전 창조시대 Matrix</button>
   <button class="footer-hot fh-next" onclick="location.href='../CEN-Exodus-Matrix/'" aria-label="다음 출애굽 광야 Matrix">다음 출애굽 광야 Matrix</button>
 </div>
