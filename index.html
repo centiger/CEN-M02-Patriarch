@@ -71,30 +71,19 @@ body{display:flex;justify-content:center}
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
 
-
 <style>
 /* === CEN fixed footer split patch === */
 :root {
-  --cen-footer-ratio: 0.39316239;
+  --cen-footer-ratio: 0.37146226;
   --cen-max-width: 768px;
 }
 html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: #020b10 !important;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 body {
-  padding-bottom: calc(min(100vw, var(--cen-max-width)) * var(--cen-footer-ratio)) !important;
-}
-img {
-  vertical-align: top;
-}
-/* 메인 이미지 하단 빈 여백 방지 */
-.main-wrap, .matrix-wrap, .stage-wrap, .screen, .app, main {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  line-height: 0;
+  padding-bottom: calc(min(100vw, var(--cen-max-width)) * var(--cen-footer-ratio));
+  background: #020b10;
 }
 .cen-fixed-footer {
   position: fixed;
@@ -106,8 +95,6 @@ img {
   pointer-events: none;
   background: #020b10;
   line-height: 0;
-  margin: 0;
-  padding: 0;
 }
 .cen-fixed-footer img {
   display: block;
@@ -115,7 +102,6 @@ img {
   height: auto;
   margin: 0;
   padding: 0;
-  border: 0;
 }
 .cen-fixed-footer .footer-hot {
   position: absolute;
@@ -129,40 +115,12 @@ img {
   padding: 0;
   margin: 0;
 }
-/* footer image = 702 x 276, crop y = 1260 */
-.cen-fixed-footer .fh-home { left: 0.5%; bottom: 0.5%; width: 17.4%; height: 44.5%; }
-.cen-fixed-footer .fh-all { left: 18.8%; bottom: 0.5%; width: 18.3%; height: 44.5%; }
-.cen-fixed-footer .fh-hub { left: 38.5%; bottom: 0.5%; width: 18.3%; height: 44.5%; }
-.cen-fixed-footer .fh-prev { left: 58.0%; bottom: 0.5%; width: 18.4%; height: 44.5%; }
-.cen-fixed-footer .fh-next { left: 77.3%; bottom: 0.5%; width: 22.1%; height: 44.5%; }
-</style>
-
-
-<style>
-/* footer top soft transition */
-.cen-fixed-footer::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: -34px;
-  width: 100%;
-  height: 42px;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(2,11,16,0), rgba(2,11,16,0.88));
-  z-index: -1;
-}
-</style>
-
-
-<style>
-/* === CEN scroll boundary clamp === */
-html, body {
-  overscroll-behavior-y: none !important;
-  overscroll-behavior-x: none !important;
-}
-body {
-  touch-action: pan-y;
-}
+/* footer image = 848 x 315, crop y = 1540 */
+.cen-fixed-footer .fh-home { left: 0.5%; bottom: 0.5%; width: 17.4%; height: 48.5%; }
+.cen-fixed-footer .fh-all { left: 18.8%; bottom: 0.5%; width: 18.3%; height: 48.5%; }
+.cen-fixed-footer .fh-hub { left: 38.5%; bottom: 0.5%; width: 18.3%; height: 48.5%; }
+.cen-fixed-footer .fh-prev { left: 58.0%; bottom: 0.5%; width: 18.4%; height: 48.5%; }
+.cen-fixed-footer .fh-next { left: 77.3%; bottom: 0.5%; width: 22.1%; height: 48.5%; }
 </style>
 
 </head>
@@ -230,66 +188,6 @@ if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.se
   <button class="footer-hot fh-prev" onclick="location.href='../CEN-Creation-Matrix/'" aria-label="이전 창조시대 Matrix">이전 창조시대 Matrix</button>
   <button class="footer-hot fh-next" onclick="location.href='../CEN-Exodus-Matrix/'" aria-label="다음 출애굽 광야 Matrix">다음 출애굽 광야 Matrix</button>
 </div>
-
-
-<script>
-/* === CEN scroll boundary clamp === */
-(function () {
-  let startY = 0;
-
-  function maxScrollY() {
-    const doc = document.documentElement;
-    const body = document.body;
-    return Math.max(
-      0,
-      Math.max(doc.scrollHeight, body.scrollHeight) - window.innerHeight
-    );
-  }
-
-  function clampScroll() {
-    const maxY = maxScrollY();
-    if (window.scrollY < 0) {
-      window.scrollTo(0, 0);
-    } else if (window.scrollY > maxY) {
-      window.scrollTo(0, maxY);
-    }
-  }
-
-  window.addEventListener("scroll", clampScroll, { passive: true });
-  window.addEventListener("resize", clampScroll, { passive: true });
-
-  document.addEventListener("touchstart", function (e) {
-    if (!e.touches || e.touches.length !== 1) return;
-    startY = e.touches[0].clientY;
-  }, { passive: true });
-
-  document.addEventListener("touchmove", function (e) {
-    if (!e.touches || e.touches.length !== 1) return;
-
-    const currentY = e.touches[0].clientY;
-    const deltaY = currentY - startY;
-    const maxY = maxScrollY();
-    const y = window.scrollY;
-
-    const pullingDownAtTop = y <= 0 && deltaY > 0;
-    const pushingUpAtBottom = y >= maxY - 1 && deltaY < 0;
-
-    if (pullingDownAtTop || pushingUpAtBottom) {
-      e.preventDefault();
-      clampScroll();
-    }
-  }, { passive: false });
-
-  document.addEventListener("wheel", function (e) {
-    const maxY = maxScrollY();
-    const y = window.scrollY;
-    if ((y <= 0 && e.deltaY < 0) || (y >= maxY - 1 && e.deltaY > 0)) {
-      e.preventDefault();
-      clampScroll();
-    }
-  }, { passive: false });
-})();
-</script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'patriarch-matrix-abraham-integrated-v2-splitfooter-fix2-footer-nogap-footer-gradient-scrollclamp-scrollclamp';
+const CACHE_NAME = 'patriarch-matrix-abraham-integrated-v2-splitfooter-fix2';
 const ASSETS_TO_CACHE = [
   './', './index.html', './style.css', './manifest.json', './manifest.webmanifest',
   './assets/patriarch-bg.png', './assets/patriarch-main.png', './assets/patriarch-matrix-bg.png',
