@@ -1,7 +1,6 @@
-CEN Patriarch Matrix v3 drag preserved + shadow footer + core flow line
-- patriarch-main.png kept at 848x1540
-- v3 hubs kept
-- footer shadow added without blur
-- cache version bumped
-
-20260604-v3-drag-shadow-flowline-limit: main drag lower bound clamp added; main/footer assets preserved.
+CEN Patriarch Matrix v3 exodus-style drag limit
+- v3 hubs preserved
+- patriarch-main.png 848x1540 preserved
+- fixed footer with flowline and shadow preserved
+- main screen scroll constrained above fixed footer
+- cache version updated

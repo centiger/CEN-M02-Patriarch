@@ -73,34 +73,106 @@ body{display:flex;justify-content:center}
     <link rel="apple-touch-icon" href="icons/icon-192.png">
 
 <style>
-/* === CEN fixed footer split patch: no image crop, drag preserved === */
+/* === CEN fixed footer + EXODUS-style scroll limit patch ===
+   원칙: patriarch-main.png 848x1540 원본 유지, v3 허브 유지,
+   body 전체 스크롤이 아니라 메인 화면(.phone.main-content)만 footer 위에서 스크롤. */
 :root {
-  --cen-footer-ratio: 0.37146226;
-  --cen-max-width: 768px;
+  --cen-footer-ratio: 0.37146226; /* 315 / 848 */
+  --cen-max-width: 560px;
+  --cen-footer-h: clamp(118px, 37.15vw, 208px);
 }
 html, body {
-  margin: 0;
-  padding: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #020b10 !important;
+  overscroll-behavior: none !important;
 }
 body {
-  padding-bottom: calc(min(100vw, var(--cen-max-width)) * var(--cen-footer-ratio));
-  background: #020b10;
-  overscroll-behavior-y: none;
+  position: fixed !important;
+  inset: 0 !important;
+  display: block !important;
+  justify-content: initial !important;
+  touch-action: none !important;
 }
-.main-content {
-  padding-bottom: 0 !important;
+.app-container {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  display: block !important;
+  background: #020b10 !important;
+}
+.phone.main-content {
+  position: fixed !important;
+  left: 50% !important;
+  top: 0 !important;
+  bottom: calc(var(--cen-footer-h) + env(safe-area-inset-bottom)) !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+  max-width: var(--cen-max-width) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: contain !important;
+  touch-action: pan-y !important;
+  scrollbar-width: none !important;
+  background: #020b10 !important;
+}
+.phone.main-content::-webkit-scrollbar { display: none !important; }
+.stage.card-grid {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  overflow: visible !important;
+  touch-action: pan-y !important;
+  background: #020b10 !important;
+}
+.stage.card-grid .bg {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  user-select: none !important;
+  pointer-events: none !important;
+}
+.stage.card-grid .hot {
+  touch-action: manipulation !important;
+}
+.stage.card-grid .e1,
+.stage.card-grid .e2,
+.stage.card-grid .e3,
+.stage.card-grid .e4,
+.stage.card-grid .e5 {
+  pointer-events: none !important;
 }
 .cen-fixed-footer {
-  position: fixed;
-  left: 50%;
-  bottom: 0;
-  width: min(100vw, var(--cen-max-width));
-  transform: translateX(-50%);
-  z-index: 9999;
-  pointer-events: none;
-  background: #020b10;
-  line-height: 0;
-  box-shadow: 0 -18px 28px rgba(0,0,0,.52);
+  position: fixed !important;
+  left: 50% !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  max-width: var(--cen-max-width) !important;
+  transform: translateX(-50%) !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+  background: #020b10 !important;
+  line-height: 0 !important;
+  box-shadow: 0 -18px 28px rgba(0,0,0,.52) !important;
+  padding-bottom: env(safe-area-inset-bottom) !important;
+  touch-action: manipulation !important;
 }
 .cen-fixed-footer::before {
   content: "";
@@ -113,15 +185,15 @@ body {
   background: linear-gradient(180deg, rgba(2,11,16,0), rgba(2,11,16,.72));
 }
 .cen-fixed-footer img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .cen-fixed-footer .footer-hot {
   position: absolute;
-  pointer-events: auto;
+  pointer-events: auto !important;
   cursor: pointer;
   border: 0;
   background: transparent;
@@ -130,13 +202,17 @@ body {
   line-height: 0;
   padding: 0;
   margin: 0;
+  touch-action: manipulation !important;
 }
-/* footer image = 848 x 315, crop y = 1540 */
+/* footer image = 848 x 315 */
 .cen-fixed-footer .fh-home { left: 0.5%; bottom: 0.5%; width: 17.4%; height: 48.5%; }
 .cen-fixed-footer .fh-all { left: 18.8%; bottom: 0.5%; width: 18.3%; height: 48.5%; }
 .cen-fixed-footer .fh-hub { left: 38.5%; bottom: 0.5%; width: 18.3%; height: 48.5%; }
 .cen-fixed-footer .fh-prev { left: 58.0%; bottom: 0.5%; width: 18.4%; height: 48.5%; }
 .cen-fixed-footer .fh-next { left: 77.3%; bottom: 0.5%; width: 22.1%; height: 48.5%; }
+.sheet, .sheetBack, .toast {
+  touch-action: auto !important;
+}
 </style>
 
 </head>
@@ -186,32 +262,13 @@ hub:{title:'족장시대 허브 탐험',meta:'5개 허브',body:'아브라함, �
 exodus:{title:'다음 시대',meta:'출애굽·광야 Matrix',body:'애굽 정착은 출애굽 시대를 준비합니다.',chips:['모세','출애굽','광야']}
 };
 const sheet=document.getElementById('sheet'),backdrop=document.getElementById('backdrop'),title=document.getElementById('sheetTitle'),meta=document.getElementById('sheetMeta'),body=document.getElementById('sheetBody'),chips=document.getElementById('chips'),toast=document.getElementById('toast');
-function goHub(id){location.href='./hubs/index.html?hub='+encodeURIComponent(id)+'&v=20260604-v3-drag-shadow-flowline-limit'}
+function goHub(id){location.href='./hubs/index.html?hub='+encodeURIComponent(id)+'&v=20260604-v3-exodus-draglimit'}
 function openSheet(key){const d=DATA[key]||DATA.abraham;title.textContent=d.title;meta.textContent=d.meta;body.textContent=d.body;chips.innerHTML=d.chips.map(c=>`<span class="chip">${c}</span>`).join('');sheet.classList.add('show');backdrop.classList.add('show')}
 function closeSheet(){sheet.classList.remove('show');backdrop.classList.remove('show')}
 document.getElementById('close').onclick=closeSheet;backdrop.onclick=closeSheet;
 function showToast(t){toast.textContent=t;toast.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.classList.remove('show'),1200)}
 if(new URLSearchParams(location.search).get('debug')==='1'){document.querySelectorAll('.hot').forEach(el=>el.classList.add('debug'))}
-function clampMainDrag(){
-  const stage=document.querySelector('.stage');
-  const footer=document.querySelector('.cen-fixed-footer');
-  if(!stage||!footer) return;
-  const footerH=footer.getBoundingClientRect().height;
-  const stageBottom=stage.getBoundingClientRect().bottom + window.scrollY;
-  const maxY=Math.max(0, Math.round(stageBottom - (window.innerHeight - footerH)));
-  if(window.scrollY > maxY) window.scrollTo(0,maxY);
-}
-let __dragClampTick=false;
-function scheduleDragClamp(){
-  if(__dragClampTick) return;
-  __dragClampTick=true;
-  requestAnimationFrame(()=>{__dragClampTick=false;clampMainDrag();});
-}
-window.addEventListener('scroll',scheduleDragClamp,{passive:true});
-window.addEventListener('resize',scheduleDragClamp);
-window.addEventListener('orientationchange',()=>setTimeout(clampMainDrag,250));
-window.addEventListener('load',clampMainDrag);
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=20260604-v3-drag-shadow-flowline-limit-limit').catch(()=>{}))}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=20260604-v3-exodus-draglimit').catch(()=>{}))}
 </script>
 </div>
 
@@ -219,7 +276,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.se
   <img src="assets/patriarch-footer.png" alt="족장시대 핵심 흐름 및 하단 메뉴">
   <button class="footer-hot fh-home" onclick="location.href='../index.html'" aria-label="홈으로">홈으로</button>
   <button class="footer-hot fh-all" onclick="location.href='../CEN-Matrix/'" aria-label="전체 시대 Matrix">전체 시대 Matrix</button>
-  <button class="footer-hot fh-hub" onclick="location.href='hubs/index.html?hub=abraham&v=20260604-v3-drag-shadow-flowline-limit'" aria-label="허브 탐험">허브 탐험</button>
+  <button class="footer-hot fh-hub" onclick="location.href='hubs/index.html?hub=abraham&v=20260604-v3-exodus-draglimit'" aria-label="허브 탐험">허브 탐험</button>
   <button class="footer-hot fh-prev" onclick="location.href='../CEN-Creation-Matrix/'" aria-label="이전 창조시대 Matrix">이전 창조시대 Matrix</button>
   <button class="footer-hot fh-next" onclick="location.href='../CEN-Exodus-Matrix/'" aria-label="다음 출애굽 광야 Matrix">다음 출애굽 광야 Matrix</button>
 </div>
