@@ -1,2 +1,1 @@
-CEN Patriarch Matrix - button links + v3 complete hubs merged
-Build: 2026-06-04-v3-merged
+CEN Patriarch Matrix - v3 hub preserved + main drag/footer refinement 20260604
