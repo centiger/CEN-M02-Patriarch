@@ -68,6 +68,23 @@ body{display:flex;justify-content:center}
 .chip{border:1px solid rgba(247,216,137,.26);background:rgba(247,216,137,.08);color:#f8e4aa;border-radius:999px;padding:8px 11px;font-size:13px;font-weight:850}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(18px);max-width:min(92vw,500px);background:rgba(8,13,18,.92);border:1px solid rgba(247,216,137,.32);color:#ffe7aa;padding:10px 14px;border-radius:999px;font-size:13px;font-weight:850;opacity:0;transition:.22s;z-index:20002}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* === Meaning/Panorama explore card UI v2 === */
+.sheet.explore-sheet h2{font-size:23px;line-height:1.1;letter-spacing:-.055em;color:#fff7de}
+.sheet.explore-sheet .meta{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:rgba(247,216,137,.10);border:1px solid rgba(247,216,137,.24);color:#f7d889;font-size:12.5px;margin-bottom:13px}
+.exploreWrap{display:grid;gap:10px;margin-top:4px;line-height:1.45}
+.exploreCard{border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:13px 13px 12px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.038));box-shadow:0 10px 26px rgba(0,0,0,.20)}
+.exploreCard.question{border-color:rgba(247,216,137,.34);background:radial-gradient(circle at top left,rgba(247,216,137,.20),rgba(255,255,255,.06) 55%,rgba(255,255,255,.035))}
+.exploreLabel{display:flex;align-items:center;gap:7px;margin-bottom:8px;color:#f7d889;font-weight:950;font-size:13px;letter-spacing:-.02em}
+.exploreText{color:rgba(255,255,255,.90);font-size:14.5px;line-height:1.62;font-weight:720;letter-spacing:-.045em;word-break:keep-all}
+.exploreText.strong{font-size:17px;color:#fff3c4;font-weight:950;line-height:1.45}
+.flowLine{display:grid;gap:5px;justify-items:center;margin-top:4px;color:#fff}
+.flowNode{width:100%;text-align:center;border:1px solid rgba(247,216,137,.20);background:rgba(247,216,137,.075);border-radius:13px;padding:9px 10px;color:#ffe8a8;font-weight:900;font-size:13.5px;line-height:1.25;letter-spacing:-.045em}
+.flowArrow{color:#f7d889;font-weight:950;opacity:.9;line-height:1}
+.thinkBox{border-color:rgba(120,190,255,.24);background:linear-gradient(180deg,rgba(70,130,180,.13),rgba(255,255,255,.04))}
+.sheet.explore-sheet .chips{margin-top:12px}
+.sheet.explore-sheet .chip{font-size:12.5px;padding:7px 10px}
+
 </style>
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -239,45 +256,6 @@ body.sheet-open .phone.main-content { pointer-events: none !important; }
 body.sheet-open .sheet, body.sheet-open .sheetBack { pointer-events: auto !important; }
 </style>
 
-
-<style id="CEN-UNIFIED-FOOTER-V5-CSS">
-body{padding-bottom:92px!important}
-.unifiedDock{position:fixed!important;left:50%!important;bottom:0!important;transform:translateX(-50%)!important;width:100%!important;max-width:560px!important;z-index:3000!important;padding:5px 10px calc(7px + env(safe-area-inset-bottom))!important;background:linear-gradient(to top,rgba(4,8,12,.98),rgba(9,18,26,.92))!important;border-top:1px solid rgba(247,216,137,.24)!important;box-shadow:0 -10px 24px rgba(0,0,0,.42)!important;backdrop-filter:blur(16px)!important;display:block!important;min-height:auto!important}
-.unifiedDock .coreFlow{margin:0 0 4px!important;text-align:center!important;color:#f7d889!important;font-weight:900!important;line-height:1.18!important;font-size:clamp(10px,2.65vw,14px)!important;letter-spacing:-.055em!important;text-shadow:0 2px 6px rgba(0,0,0,.85)!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
-.unifiedDock .coreFlow small{display:block!important;margin-bottom:1px!important;color:#d7b565!important;font-size:clamp(7px,1.9vw,10px)!important;font-weight:800!important;letter-spacing:-.03em!important;opacity:.95!important}
-.unifiedDock .unifiedNav{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:5px!important;width:100%!important;margin:0!important;padding:0!important}
-.unifiedDock .action{min-height:34px!important;border:1.2px solid rgba(247,216,137,.42)!important;border-radius:10px!important;background:linear-gradient(180deg,rgba(18,28,36,.92),rgba(8,15,22,.9))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 5px 12px rgba(0,0,0,.30)!important;color:#fff4d8!important;text-decoration:none!important;font-size:clamp(10px,2.55vw,13px)!important;font-weight:950!important;display:flex!important;align-items:center!important;justify-content:center!important;line-height:1.0!important;text-align:center!important;letter-spacing:-.06em!important;text-shadow:0 2px 5px rgba(0,0,0,.75)!important;padding:0 2px!important;cursor:pointer!important}
-.unifiedDock .action.main,.unifiedDock .action[data-link="hub"],.unifiedDock .action[data-footer="hub"]{background:linear-gradient(180deg,#d49a22,#9b660d)!important;border-color:rgba(255,224,142,.82)!important;color:#fff8e6!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 5px 13px rgba(0,0,0,.34)!important}
-@media(min-width:680px){.unifiedDock{border-radius:24px 24px 0 0!important}}
-</style>
-
-
-<style id="CEN-FOOTER-HEIGHT-FIX-V5B">
-:root{--cen-footer-h:92px!important;}
-.phone.main-content{bottom:calc(92px + env(safe-area-inset-bottom))!important;}
-.app-container{background:#020b10!important;}
-</style>
-
-<style id="CEN-BLACK-GAP-FIX-V5C">
-/* v5c: 기존 하단 흐름/푸터 예약공간 제거 + 통합 네비게이터 기준으로 재정렬 */
-:root{--footer-h:92px!important;--flow-h:0px!important;--cen-footer-h:82px!important;}
-.flow-dock,.fixedFooter:not(.unifiedDock),.cen-bottom-solid-bg,.jesus-flow-strip,.era-flow-strip{display:none!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;overflow:hidden!important;pointer-events:none!important;}
-.viewport{bottom:calc(92px + env(safe-area-inset-bottom))!important;}
-.unifiedDock{height:auto!important;min-height:0!important;}
-.unifiedDock .action{min-height:34px!important;}
-.unifiedDock .coreFlow{margin-bottom:4px!important;}
-.unifiedDock .action[data-link="overview"]{letter-spacing:-.07em!important;}
-</style>
-
-<style id="CEN-M02-NATURAL-SCROLL-FIX-V5C">
-html,body{position:static!important;width:100%!important;height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important;touch-action:auto!important;}
-body{display:flex!important;justify-content:center!important;padding-bottom:82px!important;background:#020b10!important;}
-.app-container{position:relative!important;inset:auto!important;width:100%!important;max-width:560px!important;height:auto!important;min-height:100svh!important;overflow:visible!important;background:#020b10!important;}
-.phone.main-content{position:relative!important;left:auto!important;top:auto!important;bottom:auto!important;transform:none!important;width:100%!important;max-width:560px!important;height:auto!important;min-height:0!important;margin:0 auto!important;overflow:visible!important;background:#020b10!important;}
-.stage.card-grid{margin:0!important;padding:0!important;overflow:visible!important;background:#020b10!important;}
-.stage.card-grid .bg{display:block!important;width:100%!important;height:auto!important;margin:0!important;padding:0!important;}
-.sheet{bottom:calc(82px + env(safe-area-inset-bottom) + 6px)!important;max-height:calc(100svh - 98px)!important;}
-</style>
 </head>
 <body>
 <div class="app-container">
@@ -291,11 +269,11 @@ body{display:flex!important;justify-content:center!important;padding-bottom:82px
 <button class="hot e4" onclick="goHub('joseph')" aria-label="요셉 허브"></button>
 <button class="hot e5" onclick="goHub('egypt')" aria-label="애굽 정착 허브"></button>
 
-<button class="hot b1a" onclick="goHub('abraham')"></button><button class="hot b1b" onclick="openSheet('abraham')"></button><button class="hot b1c" onclick="openSheet('covenant')"></button>
-<button class="hot b2a" onclick="goHub('isaac')"></button><button class="hot b2b" onclick="openSheet('isaac')"></button><button class="hot b2c" onclick="openSheet('covenant')"></button>
-<button class="hot b3a" onclick="goHub('jacob')"></button><button class="hot b3b" onclick="openSheet('jacob')"></button><button class="hot b3c" onclick="openSheet('covenant')"></button>
-<button class="hot b4a" onclick="goHub('joseph')"></button><button class="hot b4b" onclick="openSheet('joseph')"></button><button class="hot b4c" onclick="openSheet('providence')"></button>
-<button class="hot b5a" onclick="goHub('egypt')"></button><button class="hot b5b" onclick="openSheet('egypt')"></button><button class="hot b5c" onclick="openSheet('exodus')"></button>
+<button class="hot b1a" onclick="goHub('abraham')"></button><button class="hot b1b" onclick="openSheet('abraham')"></button><button class="hot b1c" onclick="openSheet('abrahamPanorama')"></button>
+<button class="hot b2a" onclick="goHub('isaac')"></button><button class="hot b2b" onclick="openSheet('isaac')"></button><button class="hot b2c" onclick="openSheet('isaacPanorama')"></button>
+<button class="hot b3a" onclick="goHub('jacob')"></button><button class="hot b3b" onclick="openSheet('jacob')"></button><button class="hot b3c" onclick="openSheet('jacobPanorama')"></button>
+<button class="hot b4a" onclick="goHub('joseph')"></button><button class="hot b4b" onclick="openSheet('joseph')"></button><button class="hot b4c" onclick="openSheet('josephPanorama')"></button>
+<button class="hot b5a" onclick="goHub('egypt')"></button><button class="hot b5b" onclick="openSheet('egypt')"></button><button class="hot b5c" onclick="openSheet('egyptPanorama')"></button>
 
 <button class="hot nhome" onclick="showToast('홈 연결 준비')"></button>
 <button class="hot nall" onclick="showToast('전체 시대 Matrix 연결 준비')"></button>
@@ -314,55 +292,343 @@ body{display:flex!important;justify-content:center!important;padding-bottom:82px
 
 <script>
 const DATA={
-abraham:{title:'아브라함 주제탐험',meta:'창 12:1-3',body:'하나님이 한 사람을 부르셔서 언약 백성의 시작을 여십니다.',chips:['부르심','가나안','별 언약','믿음']},
-isaac:{title:'이삭 주제탐험',meta:'창 22, 26장',body:'이삭은 약속의 아들이며 언약 계승의 통로입니다.',chips:['약속의 아들','모리아산','순종']},
-jacob:{title:'야곱 주제탐험',meta:'창 28, 32장',body:'야곱은 벧엘에서 하나님을 만나고 얍복강에서 이스라엘이라는 새 이름을 받습니다.',chips:['벧엘','얍복강','이스라엘']},
-joseph:{title:'요셉 주제탐험',meta:'창 37-50장',body:'요셉의 꿈과 고난은 애굽 총리라는 섭리의 자리로 이어집니다.',chips:['꿈','고난','총리','가족구원']},
-egypt:{title:'애굽 정착 주제탐험',meta:'창 46-50장, 출 1장',body:'야곱의 가족은 고센에 정착하여 번성합니다.',chips:['고센','번성','출애굽 준비']},
-covenant:{title:'언약의 흐름',meta:'아브라함 → 이삭 → 야곱 → 요셉',body:'족장시대의 핵심은 언약의 계승입니다.',chips:['언약','계승','구속사']},
-providence:{title:'섭리 탐험',meta:'요셉의 꿈과 애굽',body:'하나님은 고난까지도 생명을 보존하는 길로 사용하십니다.',chips:['섭리','용서','보존']},
-hub:{title:'족장시대 허브 탐험',meta:'5개 허브',body:'아브라함, 이삭, 야곱, 요셉, 애굽 정착 허브로 구성되어 있습니다.',chips:['아브라함','이삭','야곱','요셉','애굽정착']},
-exodus:{title:'다음 시대',meta:'출애굽·광야 Matrix',body:'애굽 정착은 출애굽 시대를 준비합니다.',chips:['모세','출애굽','광야']}
+  "abraham": {
+    "title": "아브라함 연결탐험",
+    "meta": "선택 · 언약 · 믿음",
+    "question": "하나님은 왜 한 사람을 선택하셨는가?",
+    "core": "하나님은 한 사람을 통해 모든 민족을 구원하시려는 계획을 시작하셨다.",
+    "meaning": "바벨탑 이후 사람들은 하나님을 떠나 자신의 이름을 높이려 했다. 그러나 하나님은 갈대아 우르에 살던 아브라함을 부르시고 새로운 역사를 시작하셨다. 아브라함을 선택하신 이유는 그 한 사람만 복 주기 위함이 아니라, 그를 통해 민족을 세우고 온 세상을 구원하시기 위함이었다.",
+    "flow": [
+      "아브라함의 부르심",
+      "이스라엘 민족",
+      "다윗 왕가",
+      "예수 그리스도",
+      "모든 민족의 구원"
+    ],
+    "think": "하나님은 지금 나를 통해 어떤 일을 시작하기 원하실까?",
+    "chips": [
+      "선택",
+      "언약",
+      "믿음",
+      "열방"
+    ],
+    "type": "meaning"
+  },
+  "abrahamPanorama": {
+    "title": "아브라함 통합탐험",
+    "meta": "바벨 이후 새 출발",
+    "question": "아브라함은 왜 믿음의 조상이라 불리는가?",
+    "core": "성경 전체에서 어디에 위치하는가?",
+    "meaning": "바벨탑 이후 열방은 하나님을 떠나 흩어졌다. 하나님은 아브라함을 부르셔서 새로운 구원의 통로를 준비하셨다. 아브라함에게 주신 언약은 이삭과 야곱을 거쳐 이스라엘 민족으로 이어졌고, 결국 예수 그리스도를 통해 모든 민족에게 성취되었다.",
+    "flow": [
+      "바벨탑",
+      "아브라함 언약",
+      "이스라엘",
+      "다윗 언약",
+      "예수 그리스도",
+      "새 하늘과 새 땅"
+    ],
+    "think": "하나님은 아브라함 한 사람을 통해 모든 민족을 향한 구원의 계획을 시작하셨다.",
+    "chips": [
+      "바벨",
+      "언약",
+      "이스라엘",
+      "예수"
+    ],
+    "type": "panorama"
+  },
+  "isaac": {
+    "title": "이삭 연결탐험",
+    "meta": "약속 · 계승 · 신실하심",
+    "question": "하나님은 약속을 잊으시는가?",
+    "core": "하나님은 더디 보일지라도 반드시 약속을 이루신다.",
+    "meaning": "하나님은 아브라함에게 아들을 주겠다고 약속하셨다. 그러나 오랜 시간이 지나도 약속은 이루어지지 않는 것처럼 보였다. 아브라함과 사라는 인간적인 방법으로 문제를 해결하려 했지만, 하나님은 자신의 때에 이삭을 주심으로 약속을 성취하셨다. 이삭의 탄생은 인간의 능력이 아니라 하나님의 신실하심으로 이루어진 사건이다.",
+    "flow": [
+      "아브라함 언약",
+      "이삭의 탄생",
+      "이스라엘 민족",
+      "메시아 약속",
+      "예수 그리스도"
+    ],
+    "think": "나는 하나님의 때를 기다리기보다 내 방법으로 문제를 해결하려 하고 있지는 않은가?",
+    "chips": [
+      "약속",
+      "기다림",
+      "계승",
+      "신실하심"
+    ],
+    "type": "meaning"
+  },
+  "isaacPanorama": {
+    "title": "이삭 통합탐험",
+    "meta": "약속의 계승",
+    "question": "하나님의 약속은 어떻게 이어지는가?",
+    "core": "성경 전체에서 어디에 위치하는가?",
+    "meaning": "하나님은 아브라함에게 후손과 땅과 복을 약속하셨다. 이삭의 탄생은 그 약속이 실제 역사 속에서 시작되었음을 보여준다. 하나님은 이삭과 야곱을 통해 언약을 이어가셨고, 결국 예수 그리스도를 통해 모든 민족에게 복을 주셨다.",
+    "flow": [
+      "아브라함 언약",
+      "이삭",
+      "야곱",
+      "이스라엘",
+      "예수 그리스도",
+      "열방의 구원"
+    ],
+    "think": "하나님은 세대를 넘어 약속을 지키시며, 예수 그리스도를 통해 그 약속을 완전히 성취하셨다.",
+    "chips": [
+      "약속",
+      "세대",
+      "언약",
+      "열방"
+    ],
+    "type": "panorama"
+  },
+  "jacob": {
+    "title": "야곱 연결탐험",
+    "meta": "변화 · 연단 · 이스라엘",
+    "question": "하나님은 부족한 사람도 사용하시는가?",
+    "core": "하나님은 완벽한 사람보다 변화되는 사람을 사용하신다.",
+    "meaning": "야곱은 거짓말과 속임수로 장자의 축복을 얻었다. 그는 형 에서를 피해 도망자가 되었고, 외삼촌 라반에게도 여러 번 속임을 당했다. 그러나 하나님은 그런 야곱을 포기하지 않으셨다. 벧엘에서 언약을 확인시켜 주셨고, 얍복강에서는 씨름을 통해 그의 이름을 야곱에서 이스라엘로 바꾸어 주셨다. 하나님은 완전한 사람을 부르시는 것이 아니라, 부르신 사람을 변화시키신다.",
+    "flow": [
+      "야곱",
+      "이스라엘",
+      "12지파",
+      "하나님의 백성",
+      "예수 그리스도"
+    ],
+    "think": "나는 하나님께 변화받기보다 여전히 내 방법으로 살아가고 있지는 않은가?",
+    "chips": [
+      "변화",
+      "연단",
+      "이스라엘",
+      "12지파"
+    ],
+    "type": "meaning"
+  },
+  "jacobPanorama": {
+    "title": "야곱 통합탐험",
+    "meta": "야곱에서 이스라엘까지",
+    "question": "왜 하나님은 야곱을 선택하셨는가?",
+    "core": "성경 전체에서 어디에 위치하는가?",
+    "meaning": "야곱은 인간적으로 보면 선택받기 어려운 사람이었다. 그러나 하나님은 그의 능력 때문이 아니라 하나님의 계획 때문에 야곱을 선택하셨다. 하나님은 야곱을 이스라엘로 바꾸시고, 그를 통해 열두 지파와 하나님의 백성을 세우셨다. 야곱에게서 시작된 이스라엘은 결국 예수 그리스도가 오시는 통로가 되었다.",
+    "flow": [
+      "아브라함",
+      "이삭",
+      "야곱",
+      "이스라엘 12지파",
+      "다윗",
+      "예수 그리스도"
+    ],
+    "think": "하나님은 부족한 사람을 변화시켜 구원의 역사를 이루시는 분이시다.",
+    "chips": [
+      "야곱",
+      "이스라엘",
+      "12지파",
+      "메시아"
+    ],
+    "type": "panorama"
+  },
+  "joseph": {
+    "title": "요셉 연결탐험",
+    "meta": "섭리 · 고난 · 보존",
+    "question": "고난에도 하나님의 계획은 이루어지는가?",
+    "core": "하나님은 고난조차 구원의 계획 안에서 사용하신다.",
+    "meaning": "요셉은 형들의 미움을 받아 애굽에 노예로 팔려갔다. 억울한 누명을 쓰고 감옥에 갇히기도 했다. 겉으로 보기에는 하나님의 약속이 실패한 것처럼 보였다. 그러나 하나님은 그 모든 과정을 통해 요셉을 애굽의 총리로 세우셨다. 결국 요셉은 가족과 민족을 기근에서 구원하는 통로가 되었다.",
+    "flow": [
+      "요셉의 고난",
+      "애굽 총리",
+      "이스라엘 보존",
+      "출애굽 준비",
+      "예수 그리스도"
+    ],
+    "think": "나는 이해되지 않는 상황 속에서도 하나님의 계획을 신뢰하고 있는가?",
+    "chips": [
+      "섭리",
+      "고난",
+      "용서",
+      "보존"
+    ],
+    "type": "meaning"
+  },
+  "josephPanorama": {
+    "title": "요셉 통합탐험",
+    "meta": "요셉에서 출애굽까지",
+    "question": "하나님은 왜 요셉을 애굽으로 보내셨는가?",
+    "core": "성경 전체에서 어디에 위치하는가?",
+    "meaning": "하나님은 아브라함에게 큰 민족을 이루겠다고 약속하셨다. 그러나 가나안의 기근은 그 약속을 위협하는 것처럼 보였다. 하나님은 요셉을 먼저 애굽으로 보내어 이스라엘 가족을 보호할 길을 준비하셨다. 애굽은 단순한 피난처가 아니라 출애굽 사건을 준비하는 무대가 되었다.",
+    "flow": [
+      "아브라함 언약",
+      "요셉의 고난",
+      "애굽 정착",
+      "출애굽",
+      "가나안 정복",
+      "예수 그리스도"
+    ],
+    "think": "하나님은 인간의 악한 의도까지 사용하여 구원의 역사를 이루시는 분이시다.",
+    "chips": [
+      "요셉",
+      "애굽",
+      "출애굽",
+      "섭리"
+    ],
+    "type": "panorama"
+  },
+  "egypt": {
+    "title": "애굽 정착 연결탐험",
+    "meta": "준비 · 성장 · 출애굽",
+    "question": "하나님은 왜 애굽으로 인도하셨는가?",
+    "core": "하나님은 미래의 구원을 위해 미리 길을 준비하신다.",
+    "meaning": "요셉의 초청으로 야곱과 그의 가족은 애굽으로 내려갔다. 가나안의 기근을 피하기 위한 선택처럼 보였지만, 하나님은 이 일을 통해 더 큰 계획을 이루고 계셨다. 애굽에서 이스라엘은 큰 민족으로 성장하게 되었고, 훗날 출애굽 사건의 주인공이 되었다. 하나님의 인도하심은 때때로 이해되지 않지만, 그분은 미래를 준비하며 역사를 이끌어 가신다.",
+    "flow": [
+      "애굽 정착",
+      "이스라엘 민족 성장",
+      "노예 생활",
+      "출애굽",
+      "가나안 입성"
+    ],
+    "think": "지금 이해되지 않는 상황 속에서도 하나님이 준비하고 계신 일을 신뢰할 수 있는가?",
+    "chips": [
+      "애굽",
+      "고센",
+      "준비",
+      "출애굽"
+    ],
+    "type": "meaning"
+  },
+  "egyptPanorama": {
+    "title": "애굽 정착 통합탐험",
+    "meta": "족장에서 출애굽으로",
+    "question": "애굽은 왜 하나님의 계획에 필요했는가?",
+    "core": "성경 전체에서 어디에 위치하는가?",
+    "meaning": "하나님은 아브라함에게 큰 민족을 약속하셨다. 그러나 작은 가족 공동체만으로는 그 약속이 이루어질 수 없었다. 하나님은 애굽이라는 환경 속에서 이스라엘을 보호하고 성장시키셨다. 애굽은 단순한 거주지가 아니라, 출애굽과 언약 백성의 탄생을 준비하는 장소였다.",
+    "flow": [
+      "아브라함 언약",
+      "애굽 정착",
+      "출애굽",
+      "시내산 언약",
+      "가나안 정복",
+      "예수 그리스도"
+    ],
+    "think": "하나님은 보이지 않는 곳에서도 구원의 역사를 준비하시는 분이시다.",
+    "chips": [
+      "준비",
+      "성장",
+      "출애굽",
+      "언약백성"
+    ],
+    "type": "panorama"
+  },
+  "covenant": {
+    "title": "언약의 흐름",
+    "meta": "아브라함 → 이삭 → 야곱 → 요셉",
+    "question": "족장시대의 핵심은 무엇인가?",
+    "core": "하나님은 언약을 세대마다 이어가신다.",
+    "meaning": "아브라함에게 시작된 언약은 이삭과 야곱을 거쳐 요셉의 보존 사건으로 이어진다.",
+    "flow": [
+      "아브라함",
+      "이삭",
+      "야곱",
+      "요셉",
+      "이스라엘"
+    ],
+    "think": "하나님은 약속을 끊지 않고 이어가시는 분이시다.",
+    "chips": [
+      "언약",
+      "계승",
+      "이스라엘"
+    ]
+  },
+  "providence": {
+    "title": "섭리 탐험",
+    "meta": "요셉의 꿈과 애굽",
+    "question": "하나님은 보이지 않을 때도 일하시는가?",
+    "core": "하나님은 고난 속에서도 구원의 길을 준비하신다.",
+    "meaning": "요셉의 고난은 우연처럼 보였지만 하나님은 그것을 생명 보존의 길로 사용하셨다.",
+    "flow": [
+      "꿈",
+      "고난",
+      "애굽",
+      "총리",
+      "가족 구원"
+    ],
+    "think": "이해되지 않는 상황 속에서도 하나님의 손길을 신뢰할 수 있는가?",
+    "chips": [
+      "섭리",
+      "용서",
+      "보존"
+    ]
+  },
+  "hub": {
+    "title": "족장시대 허브 탐험",
+    "meta": "5개 허브",
+    "question": "족장시대는 무엇을 보여주는가?",
+    "core": "선택, 약속, 변화, 섭리, 준비의 흐름이다.",
+    "meaning": "족장시대는 아브라함부터 애굽정착까지 하나님이 언약 백성을 세워 가시는 과정이다.",
+    "flow": [
+      "아브라함",
+      "이삭",
+      "야곱",
+      "요셉",
+      "애굽정착"
+    ],
+    "think": "하나님은 누구를 통해 구원을 이루시는가?",
+    "chips": [
+      "아브라함",
+      "이삭",
+      "야곱",
+      "요셉",
+      "애굽정착"
+    ]
+  },
+  "exodus": {
+    "title": "다음 시대",
+    "meta": "출애굽·광야 Matrix",
+    "question": "애굽정착 다음에는 무엇이 이어지는가?",
+    "core": "하나님은 애굽에서 자란 백성을 출애굽으로 이끄신다.",
+    "meaning": "애굽정착은 끝이 아니라 출애굽을 준비하는 장면이다.",
+    "flow": [
+      "애굽정착",
+      "노예생활",
+      "모세",
+      "출애굽",
+      "광야"
+    ],
+    "think": "하나님의 준비는 때가 되면 구원으로 드러난다.",
+    "chips": [
+      "모세",
+      "출애굽",
+      "광야"
+    ]
+  }
 };
 const sheet=document.getElementById('sheet'),backdrop=document.getElementById('backdrop'),title=document.getElementById('sheetTitle'),meta=document.getElementById('sheetMeta'),body=document.getElementById('sheetBody'),chips=document.getElementById('chips'),toast=document.getElementById('toast');
-function goHub(id){location.href='./hubs/index.html?hub='+encodeURIComponent(id)+'&v=20260606-v3-modal-layer2'}
-function openSheet(key){const d=DATA[key]||DATA.abraham;title.textContent=d.title;meta.textContent=d.meta;body.textContent=d.body;chips.innerHTML=d.chips.map(c=>`<span class="chip">${c}</span>`).join('');sheet.classList.add('show');backdrop.classList.add('show');document.body.classList.add('sheet-open')}
+function goHub(id){location.href='./hubs/index.html?hub='+encodeURIComponent(id)+'&v=20260616-m02-meaning-panorama-v2'}
+function escHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function flowHtml(arr){return `<div class="flowLine">${(arr||[]).map((x,i)=>`${i?'<div class="flowArrow">↓</div>':''}<div class="flowNode">${escHtml(x)}</div>`).join('')}</div>`}
+function openSheet(key){const d=DATA[key]||DATA.abraham;title.textContent=d.title;meta.textContent=d.meta;sheet.classList.add('explore-sheet');
+body.innerHTML=`<div class="exploreWrap">
+  <div class="exploreCard question"><div class="exploreLabel">❓ 핵심질문</div><div class="exploreText strong">${escHtml(d.question||'')}</div></div>
+  <div class="exploreCard"><div class="exploreLabel">💡 한 줄 핵심</div><div class="exploreText strong">${escHtml(d.core||'')}</div></div>
+  <div class="exploreCard"><div class="exploreLabel">📖 ${d.type==='panorama'?'구속사 의미':'사건의 의미'}</div><div class="exploreText">${escHtml(d.meaning||'')}</div></div>
+  <div class="exploreCard"><div class="exploreLabel">🔗 ${d.type==='panorama'?'성경 전체 흐름':'성경 전체 연결'}</div>${flowHtml(d.flow||[])}</div>
+  <div class="exploreCard thinkBox"><div class="exploreLabel">${d.type==='panorama'?'👑 최종 완성':'🤔 생각해보기'}</div><div class="exploreText">${escHtml(d.think||'')}</div></div>
+</div>`;
+chips.innerHTML=(d.chips||[]).map(c=>`<span class="chip">${escHtml(c)}</span>`).join('');sheet.classList.add('show');backdrop.classList.add('show');document.body.classList.add('sheet-open')}
 function closeSheet(){sheet.classList.remove('show');backdrop.classList.remove('show');document.body.classList.remove('sheet-open')}
 document.getElementById('close').onclick=closeSheet;backdrop.onclick=closeSheet;
 function showToast(t){toast.textContent=t;toast.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.classList.remove('show'),1200)}
 if(new URLSearchParams(location.search).get('debug')==='1'){document.querySelectorAll('.hot').forEach(el=>el.classList.add('debug'))}
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=20260606-v3-modal-layer2').catch(()=>{}))}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=20260616-m02-meaning-panorama-v2').catch(()=>{}))}
 </script>
 </div>
 
-<footer class="footer actions unifiedDock" aria-label="족장시대 하단 네비게이터">
-  <div class="coreFlow"><small>족장시대 핵심흐름</small>아브라함 → 이삭 → 야곱 → 요셉 → 애굽정착</div>
-  <nav class="unifiedNav" aria-label="하단 메뉴">
-    <button class="action" type="button" data-link="timeline" data-footer="timeline">성경연표</button>
-    <button class="action" type="button" data-link="connect" data-footer="connect">주제탐험</button>
-    <button class="action" type="button" data-link="overview" data-footer="overview">한눈에성경</button>
-    <button class="action main" type="button" data-link="hub" data-footer="hub" onclick="location.href='hubs/index.html'">허브</button>
-  </nav>
-</footer>
-
-<script id="CEN-UNIFIED-FOOTER-V5-LINKS">
-(function(){
-  const links={
-    timeline:'https://centiger.github.io/CEN-Chronology/?view=timeline',
-    connect:'https://centiger.github.io/CEN-Chronology/',
-    overview:'https://centiger.github.io/CEN-Bible2.0/#overview66'
-  };
-  document.addEventListener('click',function(e){
-    const btn=e.target.closest && e.target.closest('.unifiedDock .action');
-    if(!btn) return;
-    const key=btn.dataset.link || btn.dataset.footer || '';
-    if(key==='timeline'||key==='connect'||key==='overview'){
-      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
-      location.href=links[key];
-    }
-  },true);
-})();
-</script>
+<div class="cen-fixed-footer" aria-label="족장시대 하단 고정 메뉴">
+  <img src="assets/patriarch-footer.png" alt="족장시대 핵심 흐름 및 하단 메뉴">
+  <button class="footer-hot fh-home" onclick="location.href='../index.html'" aria-label="홈으로">홈으로</button>
+  <button class="footer-hot fh-all" onclick="location.href='../CEN-Matrix/'" aria-label="전체 시대 Matrix">전체 시대 Matrix</button>
+  <button class="footer-hot fh-hub" onclick="location.href='hubs/index.html?hub=abraham&v=20260616-m02-meaning-panorama-v2'" aria-label="허브 탐험">허브 탐험</button>
+  <button class="footer-hot fh-prev" onclick="location.href='../CEN-Creation-Matrix/'" aria-label="이전 창조시대 Matrix">이전 창조시대 Matrix</button>
+  <button class="footer-hot fh-next" onclick="location.href='../CEN-Exodus-Matrix/'" aria-label="다음 출애굽 광야 Matrix">다음 출애굽 광야 Matrix</button>
+</div>
 
 </body>
 </html>
