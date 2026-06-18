@@ -298,6 +298,76 @@ body{
 }
 </style>
 
+<style>
+:root{
+  --bottom-dock-h:112px !important;
+}
+
+.phone.main-content{
+  bottom:calc(var(--bottom-dock-h) + env(safe-area-inset-bottom)) !important;
+}
+
+.bottomDock{
+  position:fixed !important;
+  left:50% !important;
+  bottom:0 !important;
+  width:100% !important;
+  max-width:560px !important;
+  transform:translateX(-50%) !important;
+  z-index:9999 !important;
+  background:linear-gradient(to top,rgba(4,8,12,.98),rgba(9,18,26,.94)) !important;
+  border-top:1px solid rgba(247,216,137,.24) !important;
+  box-shadow:0 -10px 24px rgba(0,0,0,.42) !important;
+  padding:7px 8px calc(9px + env(safe-area-inset-bottom)) !important;
+}
+
+.coreFlow{
+  margin:0 0 6px !important;
+  padding:7px 10px !important;
+  border:1px solid rgba(247,216,137,.22) !important;
+  border-radius:13px !important;
+  text-align:center !important;
+  color:#f7d889 !important;
+  font-size:13px !important;
+  font-weight:900 !important;
+  line-height:1.35 !important;
+  background:rgba(255,255,255,.04) !important;
+}
+
+.coreFlow small{
+  display:block !important;
+  margin-bottom:2px !important;
+  color:#ffe8a8 !important;
+  font-size:10px !important;
+}
+
+.nav{
+  display:grid !important;
+  grid-template-columns:repeat(4,1fr) !important;
+  gap:6px !important;
+}
+
+.nav a{
+  min-height:40px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  text-decoration:none !important;
+  color:#ffe8a8 !important;
+  border:1px solid rgba(247,216,137,.24) !important;
+  border-radius:12px !important;
+  background:rgba(255,255,255,.055) !important;
+  font-size:12.5px !important;
+  font-weight:900 !important;
+  letter-spacing:-.04em !important;
+}
+
+.nav a:active{
+  background:rgba(247,216,137,.15) !important;
+}
+</style>
+    
 </head>
 <body>
 <div class="app-container">
