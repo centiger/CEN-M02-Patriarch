@@ -11,7 +11,17 @@ async function init(){
 function find(slug){return DATA.hubs.find(h=>h.slug===slug||h.id===slug)||DATA.hubs[0]}
 function nl2br(s){return esc(s).replace(/\n/g,'<br>')}
 function renderExplore(items){return (items||[]).map(x=>{if(typeof x==='string')return `<span class="chip">${esc(x)}</span>`;return `<div class="exploreCard"><b>${esc(x.title||'')}</b><p>${nl2br(x.text||'')}</p></div>`}).join('')}
-function scrollToHash(){const targetHash=location.hash;if(!targetHash)return;setTimeout(()=>{const target=document.querySelector(targetHash);if(target){target.scrollIntoView({behavior:'smooth',block:'start'})}},180)}
+function scrollToHash(){
+  const targetId = location.hash.replace('#','').split('&')[0];
+  if(!targetId) return;
+
+  setTimeout(()=>{
+    const target = document.getElementById(targetId);
+    if(target){
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  },300);
+}
 function render(slug){
   const h=find(slug); current=h;
   if(!h.ready){renderPending(h);return}
@@ -30,7 +40,8 @@ function render(slug){
   if(n){btn.style.display='block';btn.textContent=`다음: ${n.title} →`;btn.onclick=()=>go(n.slug||n.id)}
   else if(h.nextUrl){btn.style.display='block';btn.textContent=(h.nextLabel||'다음 시대로 이동')+' →';btn.onclick=()=>{location.href=h.nextUrl}}
   else{btn.style.display='none'}
-  history.replaceState(null,'',`?hub=${h.slug||h.id}${location.hash||''}&v=20260618-m02-v31`);scrollToHash();
+  const hash = location.hash || '';
+history.replaceState(null,'',`?hub=${h.slug||h.id}&v=20260618-m02-v31${hash}`);scrollToHash();
 }
 function renderPending(h){
   $('title').textContent=`${h.icon||''} ${h.title}`;
@@ -44,7 +55,8 @@ function renderPending(h){
   $('references').innerHTML='<span class="chip">준비중</span>';
   $('message').textContent='다음 제작 단계에서 완성합니다.';
   $('nextBtn').style.display='none';
-  history.replaceState(null,'',`?hub=${h.slug||h.id}${location.hash||''}&v=20260618-m02-v31`);scrollToHash();
+  const hash = location.hash || '';
+history.replaceState(null,'',`?hub=${h.slug||h.id}&v=20260618-m02-v31${hash}`);scrollToHash();
 }
 function go(slug){history.replaceState(null,'',`?hub=${slug}&v=20260618-m02-v31`);render(slug);window.scrollTo({top:0,behavior:'smooth'})}
 function openList(){
