@@ -3,21 +3,93 @@ const $=id=>document.getElementById(id);
 function qs(){return new URLSearchParams(location.search)}
 function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 async function init(){
-  const res=await fetch('./data/hubs.json?v=20260618-m02-v31',{cache:'no-store'});
+  const res=await fetch('./data/hubs.json?v=20260619-m02-v33',{cache:'no-store'});
   DATA=await res.json();
   const slug=qs().get('hub')||DATA.defaultHub||'abraham';
   render(slug);
 }
 function find(slug){return DATA.hubs.find(h=>h.slug===slug||h.id===slug)||DATA.hubs[0]}
 function nl2br(s){return esc(s).replace(/\n/g,'<br>')}
-function renderExplore(items){return (items||[]).map(x=>{
-if(typeof x==='string')return `<div class="exploreCard"><p>${nl2br(x)}</p></div>`;
-const t=esc(x.title||'');
-let body=String(x.text||'');
-body=body.replace(/\s*\|\s*/g,'\n');
-body=body.replace(/\s*→\s*/g,'\n↓\n');
-return `<div class="exploreCard"><b>${t}</b><p>${nl2br(body)}</p></div>`;
-}).join('')}
+
+function hasEmoji(s){
+  return /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(String(s||''));
+}
+
+function iconForStep(step){
+  const s=String(step||'');
+  const table=[
+    [/창조|에덴/, '🌍'],
+    [/타락|죄/, '🍎'],
+    [/아브라함|언약/, '🌟'],
+    [/이삭/, '🐏'],
+    [/야곱|이스라엘/, '🪜'],
+    [/요셉/, '🌾'],
+    [/열두 지파|지파/, '👥'],
+    [/출애굽|애굽/, '🌊'],
+    [/광야/, '🏜️'],
+    [/가나안|약속의 땅/, '🏞️'],
+    [/사사/, '⚖️'],
+    [/사무엘/, '👴'],
+    [/다윗|왕권/, '👑'],
+    [/성전|예배/, '🏛️'],
+    [/포로|바벨론/, '⛓️'],
+    [/귀환|회복/, '🚶'],
+    [/예수|그리스도|메시아|십자가/, '✝️'],
+    [/교회|초대교회/, '⛪'],
+    [/새창조|새 예루살렘/, '👑']
+  ];
+  for(const [re,icon] of table){ if(re.test(s)) return icon; }
+  return '🔹';
+}
+
+function makeVerticalFlow(text){
+  const raw=String(text||'').replace(/\s*\|\s*/g,'\n').trim();
+  const parts=raw.split(/\s*→\s*|\s*>\s*|\n\s*↓\s*\n/g).map(x=>x.trim()).filter(Boolean);
+  if(parts.length<2) return raw;
+  return parts.map(step=>{
+    return hasEmoji(step) ? step : `${iconForStep(step)} ${step}`;
+  }).join('\n↓\n');
+}
+
+function normalizeExploreItem(x){
+  let title='', body='';
+  if(typeof x==='string'){
+    const s=String(x||'');
+    if(s.includes('|')){
+      const parts=s.split('|');
+      title=parts.shift().trim();
+      body=parts.join('|').trim();
+    }else{
+      body=s.trim();
+    }
+  }else{
+    title=String(x.title||'').trim();
+    body=String(x.text||x.content||'').trim();
+  }
+
+  // 핵심: title 안에 "제목 | 설명"이 들어간 경우 분리
+  if(title.includes('|')){
+    const parts=title.split('|');
+    title=parts.shift().trim();
+    const rest=parts.join('|').trim();
+    body = rest + (body ? '\n' + body : '');
+  }
+
+  const isFlow = /연결\s*흐름|성경\s*전체\s*흐름/.test(title);
+  body = body.replace(/\s*\|\s*/g,'\n');
+  if(isFlow || body.includes('→')){
+    body = makeVerticalFlow(body);
+  }
+
+  return {title, body};
+}
+
+function renderExplore(items){
+  return (items||[]).map(x=>{
+    const item=normalizeExploreItem(x);
+    return `<div class="exploreCard">${item.title?`<b>${esc(item.title)}</b>`:''}<p>${nl2br(item.body)}</p></div>`;
+  }).join('');
+}
 function scrollToHash(){
   const targetId = location.hash.replace('#','').split('&')[0];
   if(!targetId) return;
@@ -35,7 +107,7 @@ function render(slug){
   $('title').textContent=`${h.icon||''} ${h.title}`;
   $('subtitle').textContent=h.subtitle||'';
   $('verse').textContent=h.verse||h.message||'';
-  $('map').src=(h.map||'')+'?v=20260618-m02-v31';
+  $('map').src=(h.map||'')+'?v=20260619-m02-v33';
   $('caption').innerHTML=nl2br(h.mapCaption||'');
   $('events').innerHTML=(h.events||[]).map(x=>`<div class="item"><b>${esc(x.title||'')}</b>${esc(x.text||x)}</div>`).join('');
   $('meanings').innerHTML=(h.meanings||[]).map(x=>`<li>${esc(x)}</li>`).join('');
@@ -48,13 +120,13 @@ function render(slug){
   else if(h.nextUrl){btn.style.display='block';btn.textContent=(h.nextLabel||'다음 시대로 이동')+' →';btn.onclick=()=>{location.href=h.nextUrl}}
   else{btn.style.display='none'}
   const hash = location.hash || '';
-history.replaceState(null,'',`?hub=${h.slug||h.id}&v=20260618-m02-v31${hash}`);scrollToHash();
+history.replaceState(null,'',`?hub=${h.slug||h.id}&v=20260619-m02-v33${hash}`);scrollToHash();
 }
 function renderPending(h){
   $('title').textContent=`${h.icon||''} ${h.title}`;
   $('subtitle').textContent=h.subtitle||'제작 예정';
   $('verse').textContent='이 허브는 다음 단계에서 제작할 예정입니다.';
-  $('map').src='assets/maps/abraham-hub-map.png?v=20260618-m02-v31';
+  $('map').src='assets/maps/abraham-hub-map.png?v=20260619-m02-v33';
   $('caption').textContent='족장시대 허브 구조에 맞춰 PNG 교체형 지도 영역을 유지합니다.';
   $('events').innerHTML='<div class="item"><b>제작 예정</b>내용 추가 예정입니다.</div>';
   $('meanings').innerHTML='<li>내용 추가 예정</li>';
@@ -63,9 +135,9 @@ function renderPending(h){
   $('message').textContent='다음 제작 단계에서 완성합니다.';
   $('nextBtn').style.display='none';
   const hash = location.hash || '';
-history.replaceState(null,'',`?hub=${h.slug||h.id}&v=20260618-m02-v31${hash}`);scrollToHash();
+history.replaceState(null,'',`?hub=${h.slug||h.id}&v=20260619-m02-v33${hash}`);scrollToHash();
 }
-function go(slug){history.replaceState(null,'',`?hub=${slug}&v=20260618-m02-v31`);render(slug);window.scrollTo({top:0,behavior:'smooth'})}
+function go(slug){history.replaceState(null,'',`?hub=${slug}&v=20260619-m02-v33`);render(slug);window.scrollTo({top:0,behavior:'smooth'})}
 function openList(){
   $('hubList').innerHTML=DATA.hubs.map(h=>`<button class="hubOpt" onclick="closeList();go('${h.slug||h.id}')">${h.icon||''} ${h.title}<small>${h.subtitle||''}${h.ready?'':' · 제작 예정'}</small></button>`).join('');
   $('dialog').classList.add('show')
