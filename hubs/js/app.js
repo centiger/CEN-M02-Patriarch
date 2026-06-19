@@ -10,7 +10,14 @@ async function init(){
 }
 function find(slug){return DATA.hubs.find(h=>h.slug===slug||h.id===slug)||DATA.hubs[0]}
 function nl2br(s){return esc(s).replace(/\n/g,'<br>')}
-function renderExplore(items){return (items||[]).map(x=>{if(typeof x==='string')return `<span class="chip">${esc(x)}</span>`;return `<div class="exploreCard"><b>${esc(x.title||'')}</b><p>${nl2br(x.text||'')}</p></div>`}).join('')}
+function renderExplore(items){return (items||[]).map(x=>{
+if(typeof x==='string')return `<div class="exploreCard"><p>${nl2br(x)}</p></div>`;
+const t=esc(x.title||'');
+let body=String(x.text||'');
+body=body.replace(/\s*\|\s*/g,'\n');
+body=body.replace(/\s*→\s*/g,'\n↓\n');
+return `<div class="exploreCard"><b>${t}</b><p>${nl2br(body)}</p></div>`;
+}).join('')}
 function scrollToHash(){
   const targetId = location.hash.replace('#','').split('&')[0];
   if(!targetId) return;
