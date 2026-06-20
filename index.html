@@ -368,6 +368,45 @@ body{
 }
 </style>
     
+
+<style id="m02-main-button-label-fix">
+/* M02 메인화면 버튼명 텍스트 레이어 보정 */
+.b1b,.b2b,.b3b,.b4b,.b5b,
+.b1c,.b2c,.b3c,.b4c,.b5c{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border:1px solid rgba(247,216,137,.56) !important;
+  border-radius:12px !important;
+  background:linear-gradient(180deg,rgba(18,21,24,.88),rgba(5,8,12,.86)) !important;
+  box-shadow:0 6px 16px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  color:#f7ead0 !important;
+  font-size:clamp(8px,1.95vw,11px) !important;
+  font-weight:900 !important;
+  line-height:1 !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.85) !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+}
+.b1c,.b2c,.b3c,.b4c,.b5c{
+  border-color:rgba(208,155,255,.72) !important;
+  background:linear-gradient(180deg,rgba(51,36,75,.88),rgba(14,10,24,.86)) !important;
+}
+.b1b::after,.b2b::after,.b3b::after,.b4b::after,.b5b::after{
+  content:"🔗 Meaning";
+}
+.b1c::after,.b2c::after,.b3c::after,.b4c::after,.b5c::after{
+  content:"✦ 파노라마";
+}
+@media(max-width:390px){
+  .b1b,.b2b,.b3b,.b4b,.b5b,
+  .b1c,.b2c,.b3c,.b4c,.b5c{
+    font-size:8.4px !important;
+    border-radius:10px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="app-container">
